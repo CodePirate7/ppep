@@ -1,9 +1,7 @@
 //导入模块
 const express = require('express'),
       mongoose = require('mongoose'),
-
-
-const app = express()
+      app = express()
 
 //连接数据库
 mongoose.connect('mongodb://localhost/experience',{ useNewUrlParser: true })
