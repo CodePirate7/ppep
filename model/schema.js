@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 
 //创建用户表输入规则
-const usersSchem = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     user_name: {type: String, required: true}, //用户名
     user_id : {type: String, required: true},  //用户账号
     user_hear: {type: String},                 //用户头像
@@ -12,3 +12,6 @@ const usersSchem = new mongoose.Schema({
 })
 
 //
+const user = mongoose.model("user" , userSchema)
+
+module.exports = user

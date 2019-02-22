@@ -1,17 +1,18 @@
 //导入模块
 const express = require('express'),
-      mongoose = require('mongoose')
+      mongoose = require('mongoose'),
+
 
 const app = express()
 
 //连接数据库
-const db = mongoose.connect('mongodb://localhost/experience',{ useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/experience',{ useNewUrlParser: true })
 
 //测试数据库是否连接成功
-db.on("error", (err) => {
+mongoose.connection.on("error", (err) => {
     console.log(err)
 })
-db.on('open',() => {
+mongoose.connection.on('open',() => {
     console.log("数据库连接成功!");
 })
 
@@ -26,9 +27,10 @@ app.use(express.static(__dirname + '/public'))
 app.set('view engine','ejs')
 
 //设置模板引擎目录为当前目录下的view文件夹
-app.set('views',__dirname + 'view')
+app.set('views',__dirname + '/view')
 
-
+//设置路由
+app.use('/',require('./router/index.js'))
 
 
 

@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <script src="./layui/layui.js"></script>
+    <title>项目流程体验平台</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+            height: 60px;
+            border:1px solid #eee;
+            box-shadow: 0px 0px 10px #000000;
+        }
+        .layui-nav{
+            background: #fff;
+        }
+        .user_form{
+            margin-top: 50px;
+        }
+        .layui-input:hover{
+            box-shadow: 0 0 5px rgb(91, 191, 222)
+        }
+        .user_form{
+            width: 850px;
+            height: 400px;
+            border: 1px solid #eee;
+            /* padding-top: 100px; */
+        }
+        .layui-form-pane{
+            border-radius: 100px;
+        }
+        .left{
+            height: 400px;
+            background:#eee
+        }
+        .right{
+            height: 400px;
+            padding-top: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="layui-container">
+            <ul>
+                <li class=""><a><img src="./LOG.png" alt=""></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-container user_form">
+        <div class="layui-row">
+            <div class="layui-col-md6 left">
+                
+            </div>
+            <div class="layui-col-md6 right">
+                <fieldset class="layui-elem-field layui-field-title" style="text-align:center">
+                    <legend><font style="vertical-align: inherit;">登录</font></legend>
+                </fieldset>
+                <form class="layui-form" action="">
+                    <div class="layui-form-item layui-form-pane">
+                        <label class="layui-form-label">用户框</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" required lay-verify="required" placeholder="Username"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-pane">
+                        <label class="layui-form-label">密码框</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" required lay-verify="required" placeholder="Password"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <button type="submit" class="layui-btn layui-btn-fluid layui-btn-radius" lay-submit lay-filter="formDemo">登录</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        layui.use(['element', 'form'], function () {
+                    let element = layui.element,
+                        form = layui.form,
+                        $ = layui.$;
+                    //监听form表单
+                    form.on('submit(formDemo)',data =>{
+                        console.log(data);
+                        $.ajax({
+                            url: '/login',
+                            method: 'post',
+                            data:{
+                                username: data.field.username,
+                                password: data.field.password
+                            },
+                        })
+                        return false;
+                    })
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        $(() => {
+                        let WindowWidth = $(window).width() - 30;
+                        if ($(window).width() < 768) {
+                            $(".user_form").css('width', WindowWidth + 'px')
+                        }
+                            $(window).resize(() => {
+                                let WindowWidth = $(window).width() - 30;
+                                if ($(window).width() < 768) {
+                                    $(".user_form").css('width', WindowWidth + 'px')
+                                    if ($(window).width() >= 768) {
+                                        $(".user_form").css('width', 450 + 'px')
+                                    }
+                                }
+                            })
+                        });
+                    })
+    </script>
+</body>
+
+</html>
