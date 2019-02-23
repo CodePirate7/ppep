@@ -1,7 +1,10 @@
 //导入模块
 const express = require('express'),
       mongoose = require('mongoose'),
+      session = require("express-session"),
+      Mongosession = require("connect-mongo")(session),
       app = express()
+
 
 //连接数据库
 mongoose.connect('mongodb://localhost/experience',{ useNewUrlParser: true })
@@ -13,6 +16,15 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on('open',() => {
     console.log("数据库连接成功!");
 })
+//设置登陆信息
+app.use(session({
+    secret: "aaa", //设置密钥
+    rolling: true, //根据操作，延长时间
+    cookie: {maxAge: 1000 * 60 * 60}, //设置保存时间1个小时
+    store: new Mongosession({  //将数据存在数据库中
+        url: "mongodb://localhost/actual"
+    })
+}))
 
 //处理post传入的数据为json格式
 app.use(express.json())

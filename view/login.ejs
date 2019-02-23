@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="./layui/css/layui.css">
     <link rel="shortcut icon" href="./favicon.ico">
     <script src="./layui/layui.js"></script>
-    <title>项目流程体验平台</title>
+    <title>
+        <%- title%>
+    </title>
     <style>
         *{
             margin: 0;
@@ -44,6 +46,9 @@
             height: 400px;
             padding-top: 70px;
         }
+        .layui-btn{
+            background: rgb(91, 191, 222);
+        }
     </style>
 </head>
 
@@ -58,15 +63,17 @@
     <div class="layui-container user_form">
         <div class="layui-row">
             <div class="layui-col-md6 left">
-                
+
             </div>
             <div class="layui-col-md6 right">
                 <fieldset class="layui-elem-field layui-field-title" style="text-align:center">
-                    <legend><font style="vertical-align: inherit;">登录</font></legend>
+                    <legend>
+                        <font style="vertical-align: inherit;">登录</font>
+                    </legend>
                 </fieldset>
                 <form class="layui-form" action="">
                     <div class="layui-form-item layui-form-pane">
-                        <label class="layui-form-label">用户框</label>
+                        <label class="layui-form-label">用户名</label>
                         <div class="layui-input-block">
                             <input type="text" name="username" required lay-verify="required" placeholder="Username"
                                 autocomplete="off" class="layui-input">
@@ -87,46 +94,54 @@
 
     <script>
         layui.use(['element', 'form'], function () {
-                    let element = layui.element,
-                        form = layui.form,
-                        $ = layui.$;
-                    //监听form表单
-                    form.on('submit(formDemo)',data =>{
-                        console.log(data);
-                        $.ajax({
-                            url: '/login',
-                            method: 'post',
-                            data:{
-                                username: data.field.username,
-                                password: data.field.password
-                            },
-                        })
-                        return false;
-                    })
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        $(() => {
-                        let WindowWidth = $(window).width() - 30;
-                        if ($(window).width() < 768) {
-                            $(".user_form").css('width', WindowWidth + 'px')
+            let element = layui.element,
+                form = layui.form,
+                $ = layui.$;
+            //监听form表单
+            form.on('submit(formDemo)', data => {
+                $.ajax({
+                    url: '/login',
+                    method: 'post',
+                    data: {
+                        username: data.field.username,
+                        password: data.field.password
+                    },
+                    success(data) {
+                        layer.alert(data.msg);
+                        // if (msg.code === 0) {
+                        //     location.href = "/"
+                        // }
+                        if(data.code === 1){
+                            layer.alert("登陆失败,请稍后再试!")
                         }
-                            $(window).resize(() => {
-                                let WindowWidth = $(window).width() - 30;
-                                if ($(window).width() < 768) {
-                                    $(".user_form").css('width', WindowWidth + 'px')
-                                    if ($(window).width() >= 768) {
-                                        $(".user_form").css('width', 450 + 'px')
-                                    }
-                                }
-                            })
-                        });
-                    })
+                    }
+                })
+                return false;
+            })
+
+
+
+
+
+
+
+
+            $(() => {
+                let WindowWidth = $(window).width() - 30;
+                if ($(window).width() < 768) {
+                    $(".user_form").css('width', WindowWidth + 'px')
+                }
+                $(window).resize(() => {
+                    let WindowWidth = $(window).width() - 30;
+                    if ($(window).width() < 768) {
+                        $(".user_form").css('width', WindowWidth + 'px')
+                        if ($(window).width() >= 768) {
+                            $(".user_form").css('width', 850 + 'px')
+                        }
+                    }
+                })
+            });
+        })
     </script>
 </body>
 

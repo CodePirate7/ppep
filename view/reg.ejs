@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <script src="./layui/layui.js"></script>
+    <title><%- title %></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+            height: 60px;
+            border:1px solid #eee;
+            box-shadow: 0px 0px 10px #000000;
+        }
+        .layui-nav{
+            background: #fff;
+        }
+        .layui-input:hover{
+            box-shadow: 0 0 5px rgb(91, 191, 222)
+        }
+        .user_form{
+            width: 850px;
+            height: 450px;
+            margin-top: 40px;
+            /* border: 1px solid #eee; */
+            /* padding-top: 100px; */
+            box-shadow: 0 0 10px #999
+        }
+        .layui-form-pane{
+            border-radius: 100px;
+        }
+        .left{
+            height: 450px;
+            background:#eee
+        }
+        .right{
+            height: 450px;
+            padding-top: 5px;
+        }
+        .layui-form-select dl dd.layui-this{
+            background:rgb(91, 191, 222);
+        }
+        .layui-form-checked span{
+            background: rgb(91, 191, 222);
+        }
+        .layui-form-checked i{
+            color: rgb(91, 191, 222)
+        }
+        .layui-form-checked:hover span{
+            background: rgb(91, 191, 222);
+        }
+        .layui-form-checked:hover i{
+            color: rgb(91, 191, 222)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="layui-container">
+            <ul>
+                <li class=""><a><img src="./LOG.png" alt=""></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-container user_form">
+        <div class="layui-row">
+            <div class="layui-col-md6 left">
+
+            </div>
+            <div class="layui-col-md6 right">
+                <fieldset class="layui-elem-field layui-field-title" style="text-align:center">
+                    <legend>
+                        <font style="vertical-align: inherit;">注册</font>
+                    </legend>
+                </fieldset>
+                <form class="layui-form" id="form1">
+                    <div class="layui-form-item layui-form-pane">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" required lay-verify="required|username" placeholder="Username"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-pane">
+                        <label class="layui-form-label">密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" required lay-verify="required|pass" placeholder="Password"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-pane">
+                        <label class="layui-form-label">确认密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="aginpassword" required lay-verify="required|pass" placeholder="Password"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-pane">
+                        <label class="layui-form-label">专业</label>
+                        <div class="layui-input-block">
+                            <select name="major" lay-verify="required">
+                                <option value=""></option>
+                                <option value="计算机科学与技术">计算机科学与技术</option>
+                                <option value="软件工程">软件工程</option>
+                                <option value="信息安全">信息安全</option>
+                                <option value="网络工程">网络工程</option>
+                                <option value="数字媒体">数字媒体</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-pane">
+                        <label class="layui-form-label">第二技能</label>
+                        <div class="layui-input-block layui-form-pane ">
+                            <input type="checkbox" name="like" value="run" title="运动">
+                            <input type="checkbox" name="like" value="read" title="阅读">
+                            <input type="checkbox" name="like" value="painting"title="绘画">
+                            <input type="checkbox" name="like" value="music" title="音乐">
+                            <input type="checkbox" name="like" value="dance" title="舞蹈">
+                            <input type="checkbox" name="like" value="chinese" title="国学">
+                            <input type="checkbox" name="like" value="design" title="设计">
+                            <input type="checkbox" name="like" value="photo" title="摄影">
+                            <input type="checkbox" name="like" value="manual" title="手工">
+                        </div>
+                    </div>
+                    <button type="submit" onsubmit="return false" class="layui-btn layui-btn-fluid layui-btn-radius" lay-submit lay-filter="formDemo"
+                        style="background:rgb(91, 191, 222)">
+                        <font style="vertical-align: inherit;font-size: 14px;">注册</font>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        layui.use(['element', 'form'], function () {
+            let element = layui.element,
+                form = layui.form,
+                $ = layui.$
+                $('#form1').submit(e=>{
+                    e.preventDefault();
+                    console.log(e);
+                    $.post("/reg",$('#form1').serialize(),(data, err)=>{
+                        layer.alert(data.msg);
+                    })
+                })
+            form.verify({
+                username: function (value, item) { //value：表单的值、item：表单的DOM对象
+                    if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                        return '用户名不能有特殊字符';
+                    }
+                    if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                        return '用户名首尾不能出现下划线\'_\'';
+                    }
+                    if (/^\d+\d+\d$/.test(value)) {
+                        return '用户名不能全为数字';
+                    }
+                },
+                pass: [
+                    /^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'
+                ]
+            });
+
+
+
+
+
+
+
+            $(() => {
+                let WindowWidth = $(window).width() - 30;
+                if ($(window).width() < 768) {
+                    $(".user_form").css('width', WindowWidth + 'px')
+                }
+                $(window).resize(() => {
+                    let WindowWidth = $(window).width() - 30;
+                    if ($(window).width() < 768) {
+                        $(".user_form").css('width', WindowWidth + 'px')
+                    }
+                    if ($(window).width() >= 768) {
+                        $(".user_form").css('width', 850 + 'px')
+                    }
+                })
+            });
+        })
+    </script>
+</body>
+
+</html>
