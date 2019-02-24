@@ -10,10 +10,11 @@ const express = require('express'),
 mongoose.connect('mongodb://localhost/experience',{ useNewUrlParser: true })
 
 //测试数据库是否连接成功
-mongoose.connection.on("error", (err) => {
+const db = mongoose.connection
+db.on("error", (err) => {
     console.log(err)
 })
-mongoose.connection.on('open',() => {
+db.on('open',() => {
     console.log("数据库连接成功!");
 })
 //设置登陆信息
@@ -40,12 +41,13 @@ app.set('view engine','ejs')
 app.set('views',__dirname + '/view')
 
 //设置路由
-app.use('/',require('./router/index.js'))
-
+app.use('/',require('./router/router.js'))
 
 
 
 
 
 //设置监听端口
-app.listen(5000)
+app.listen(5000,() => {
+    console.log('项目启动成功,监听在5000端口!');
+})
