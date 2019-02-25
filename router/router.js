@@ -1,11 +1,10 @@
 const express = require('express'),
       router = express.Router(),
-      User = require("../model/schema.js")
-      user = require('../model/user.js')
+      User = require("../model/schema.js") //导入user这个表
+      user = require('../model/user.js') //对user操作的逻辑结构
+      
 //监听引导页面
-router.get('/',( req , res ) => {
-    res.send('这里是主页')
-})
+router.get('/',( req , res ) => {res.send('这里是主页')})
 //监听注册页面
 router.get('/reg',( req , res ) => { res.render('reg',{title: "注册用户"})})
       .post('/reg',user.reg)

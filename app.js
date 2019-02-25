@@ -7,7 +7,7 @@ const express = require('express'),
 
 
 //连接数据库
-mongoose.connect('mongodb://localhost/experience',{ useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/ppep',{ useNewUrlParser: true })
 
 //测试数据库是否连接成功
 const db = mongoose.connection
@@ -23,7 +23,7 @@ app.use(session({
     rolling: true, //根据操作，延长时间
     cookie: {maxAge: 1000 * 60 * 60}, //设置保存时间1个小时
     store: new Mongosession({  //将数据存在数据库中
-        url: "mongodb://localhost/actual"
+    url: "mongodb://localhost/ppep"
     })
 }))
 

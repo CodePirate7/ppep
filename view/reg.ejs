@@ -59,6 +59,11 @@
         .layui-container{
             padding: 0px;
         }
+        /* .img-responsive{
+            display: block;
+            height: auto;
+            max-width: 100%;
+        } */
     </style>
 </head>
 
@@ -66,14 +71,14 @@
     <div class="nav">
         <div class="layui-container">
             <ul>
-                <li class=""><a><img src="./logo.png" alt=""></a></li>
+                <li class=""><a><img src="./logo.png"  alt=""></a></li>
             </ul>
         </div>
     </div>
     <div class="layui-container user_form">
         <div class="layui-row">
             <div class="layui-col-md6 left">
-                <img src="left.png" alt="" srcset="">
+                <img src="left.png"  alt="" srcset="">
             </div>
             <div class="layui-col-md6 right">
                 <fieldset class="layui-elem-field layui-field-title" style="text-align:center">
@@ -99,7 +104,7 @@
                     <div class="layui-form-item layui-form-pane">
                         <label class="layui-form-label">确认密码</label>
                         <div class="layui-input-block">
-                            <input type="password" name="aginpassword" required lay-verify="required|pass" placeholder="Password"
+                            <input type="password" name="password" required lay-verify="required|pass" placeholder="Password"
                                 autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -139,31 +144,32 @@
         </div>
     </div>
     <script>
-        layui.use(['element', 'form'], function () {
+        layui.use(['element', 'form','layer'], function () {
             let element = layui.element,
                 form = layui.form,
-                $ = layui.$
+                $ = layui.$,
+                layer = layui.layer
                 $('#form1').submit(e=>{
                     e.preventDefault();
-                    console.log(e);
                     $.post("/reg",$('#form1').serialize(),(data, err)=>{
                         layer.alert(data.msg);
                     })
                 })
+            //匹配两次密码是否正确
+            let $password = $('.layui-input-block input[name=password]')
+            $password.eq(1).on("blur",function(){
+                const pwd = $password.eq(0).val()
+                if($(this).val() !== pwd){
+                    layer.msg("两次密码不一致")
+                $(this).val("")
+            }               
+            })
             form.verify({
-                username: function (value, item) { //value：表单的值、item：表单的DOM对象
-                    if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
-                        return '用户名不能有特殊字符';
-                    }
-                    if (/(^\_)|(\__)|(\_+$)/.test(value)) {
-                        return '用户名首尾不能出现下划线\'_\'';
-                    }
-                    if (/^\d+\d+\d$/.test(value)) {
-                        return '用户名不能全为数字';
-                    }
-                },
+                username: [
+                /^[a-z]\w{5,17}$/i,'用户名必须以字母开头且6~18,不允许出现特殊符号'
+                ],
                 pass: [
-                    /^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'
+                    /^[\w\-\]\\<>,.?/+*=)([{}:;"'&^%$#@!`~|]{6,18}$/, '密码必须6到12位'
                 ]
             });
 
