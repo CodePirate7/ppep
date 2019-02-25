@@ -113,7 +113,7 @@
                     },
                     success(data) {
                         layer.alert(data.msg);
-                        if (msg.code === 0) {
+                        if (data.code === 0) {
                             location.href = "/"
                         }
                         if(data.code === 1){

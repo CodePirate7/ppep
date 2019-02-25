@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
+    <title>项目流程体验平台</title>
     <link rel="stylesheet" href="./layui/css/layui.css">
     <script src="./layui/layui.js"></script>
     <style>
@@ -41,31 +41,56 @@
             background: rgb(91, 191, 222)
         }
 
-        .layui-col-sm3 span:hover {
+        .layui-col-sm3 .h:hover {
             background: rgb(91, 191, 222)
         }
 
         .layui-row>div>span {
             display: inline-block;
-            width: 40%;
+            
         }
 
         .this {
             background: rgb(91, 191, 222)
         }
-        .layui-field-box{
+
+        .layui-field-box {
             height: 200px;
             border: 1px solid #eee;
+        }
+
+        .img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        .img-responsive{
+            display: block;
+            height: auto;
+            max-width: 100%;
+        }
+        .collapse{
+            display: none;
+
+        }
+        .collapse-btn{
+            display: none;
         }
     </style>
 </head>
 
 <body>
     <div class="bg">
-        <div class="layui-container">
+        <div class="layui-flid">
             <div class="layui-row">
-                <div class="layui-col-sm3"><img src="logo.png" alt=""></div>
-                <div class="layui-col-sm1"><a href="/">首页</a></div>
+                <div class="layui-col-sm3">
+                    <img src="logo.png" alt="">
+                    <button type="button" class="collapse-btn" style="position:relative;top:0;right:0;background: #000;">
+                        <i class=" layui-icon layui-icon-align-center" ></i>
+                    </button>
+                </div>
+                <div class="layui-col-sm1 this "><a href="/">首页</a></div>
                 <div class="layui-col-sm1"><a href="">论坛</a></div>
                 <div class="layui-col-sm1"><a href="">新闻中心</a></div>
                 <div class="layui-col-sm1"><a href="">我的项目</a></div>
@@ -73,24 +98,28 @@
                 <div class="layui-col-sm1"><a href="">个人中心</a></div>
                 <div class="layui-col-sm3">
                     <% if (login) {%>
-                    <span><a href="">头像</a></span>
-                    <span><a href="">用户名</a></span>
-                    <span><a href="">退出</a></span>
+                    <span style="width:70%"><a href=""><img src="delf.jpeg" class="img" alt=""><%- user.username %></a></span>
+                    <span style="width:20%"class="h"><a href="">退出</a></span>
                     <%} else{%>
-                    <span><a href="/login">立即登陆</a></span>
-                    <span><a href="/reg">注册</a></span>
+                    <span class="h" tyle="width:50%"><a href="/login">立即登陆</a></span>
+                    <span class="h" tyle="width:50%"><a href="/reg">注册</a></span>
                     <%}%>
                 </div>
             </div>
-            <div class="layui-row" style="margin-top:20px;">
+            <div class="layui-row" style="margin-top:20px;margin-bottom: 20px">
                 <div class="layui-carousel" id="test1">
                     <div carousel-item>
-                        <div style="background:lightblue"></div>
+                        <div><img class="img-responsive"src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551110516043&di=1941da52edcf5da15256aa68ee6fde81&imgtype=0&src=http%3A%2F%2Fimg.gulujie.com%2Fuploadimg%2F2017%2F02%2F20170202021742525RU6hr.jpg" alt=""></div>
                         <div style="background:lightgreen"></div>
                         <div style="background: lightslategrey"></div>
+                        <div style="background:crimson"></div>
+                        <div style="background:darkmagenta"></div>
                     </div>
                 </div>
             </div>
+            
+        </div>
+        <div class="layui-container">
             <div class="layui-row">
                 <fieldset class="layui-elem-field layui-field-title">
                     <legend>新闻中心</legend>
@@ -116,12 +145,13 @@
                 </fieldset>
             </div>
             <div class="layui-footer">
-                    <!-- 底部固定区域 -->
-                    © Gzu - 项目流程体验平台
+                <!-- 底部固定区域 -->
+                © Gzu - 项目流程体验平台
             </div>
         </div>
     </div>
     
+
 
 
 
@@ -130,13 +160,35 @@
         layui.use(['element', 'carousel'], function () {
             var element = layui.element;
             var carousel = layui.carousel;
-            //建造实例
+            let $ = layui.$;
+            //建造轮播实例
             carousel.render({
                 elem: '#test1',
                 width: '100%', //设置容器宽度
-                arrow: 'always' //始终显示箭头
+                arrow: 'always', //始终显示箭头
+                height: '370px'
                 //,anim: 'updown' //切换动画方式
             });
+            //this
+            let $items = $('.layui-col-sm1')
+            $items.on("mouseover",function(){
+                $items.eq(0).removeClass("this");
+            })
+            $items.on("mouseout",function(){      
+                $items.eq(0).addClass("this");    
+            })
+            //按钮
+            let $sm1 = $('.layui-col-sm1');
+            let $sm3 = $('.layui-col-sm3');
+            let WindowWidth = $(window).width();
+            if (WindowWidth < 1071){
+                $sm1.addClass('collapse');
+                $sm3.eq(1).addClass('collapse');
+                let $btn = $('.layui-col-sm3 button');
+                $btn.removeClass("collapse-btn");
+            }
+            console.log(WindowWidth);
+            
         });
     </script>
 </body>
