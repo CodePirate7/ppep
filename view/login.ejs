@@ -113,9 +113,9 @@
                     },
                     success(data) {
                         layer.alert(data.msg);
-                        // if (msg.code === 0) {
-                        //     location.href = "/"
-                        // }
+                        if (msg.code === 0) {
+                            location.href = "/"
+                        }
                         if(data.code === 1){
                             layer.alert("登陆失败,请稍后再试!")
                         }

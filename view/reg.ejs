@@ -153,6 +153,11 @@
                     e.preventDefault();
                     $.post("/reg",$('#form1').serialize(),(data, err)=>{
                         layer.alert(data.msg);
+                        if( data.code === 0 ){
+                            setTimeout(()=>{
+                                location.href = "/"
+                            },1000)
+                        }
                     })
                 })
             //匹配两次密码是否正确

@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <script src="./layui/layui.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bg {
+            height: 60px;
+            box-shadow: 0px 0px 10px #000000;
+        }
+
+        .layui-container {
+            padding: 0;
+        }
+
+        .layui-row .layui-col-sm1 {
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .layui-col-sm3 {
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+
+        .layui-col-sm1:hover {
+            background: rgb(91, 191, 222)
+        }
+
+        .layui-col-sm3 span:hover {
+            background: rgb(91, 191, 222)
+        }
+
+        .layui-row>div>span {
+            display: inline-block;
+            width: 40%;
+        }
+
+        .this {
+            background: rgb(91, 191, 222)
+        }
+        .layui-field-box{
+            height: 200px;
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <div class="layui-container">
+            <div class="layui-row">
+                <div class="layui-col-sm3"><img src="logo.png" alt=""></div>
+                <div class="layui-col-sm1"><a href="/">首页</a></div>
+                <div class="layui-col-sm1"><a href="">论坛</a></div>
+                <div class="layui-col-sm1"><a href="">新闻中心</a></div>
+                <div class="layui-col-sm1"><a href="">我的项目</a></div>
+                <div class="layui-col-sm1"><a href="">项目分类</a></div>
+                <div class="layui-col-sm1"><a href="">个人中心</a></div>
+                <div class="layui-col-sm3">
+                    <% if (login) {%>
+                    <span><a href="">头像</a></span>
+                    <span><a href="">用户名</a></span>
+                    <span><a href="">退出</a></span>
+                    <%} else{%>
+                    <span><a href="/login">立即登陆</a></span>
+                    <span><a href="/reg">注册</a></span>
+                    <%}%>
+                </div>
+            </div>
+            <div class="layui-row" style="margin-top:20px;">
+                <div class="layui-carousel" id="test1">
+                    <div carousel-item>
+                        <div style="background:lightblue"></div>
+                        <div style="background:lightgreen"></div>
+                        <div style="background: lightslategrey"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>新闻中心</legend>
+                    <div class="layui-field-box">
+                        内容区域
+                    </div>
+                </fieldset>
+            </div>
+            <div class="layui-row">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>项目推荐</legend>
+                    <div class="layui-field-box">
+                        内容区域
+                    </div>
+                </fieldset>
+            </div>
+            <div class="layui-row">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>竞赛消息</legend>
+                    <div class="layui-field-box">
+                        内容区域
+                    </div>
+                </fieldset>
+            </div>
+            <div class="layui-footer">
+                    <!-- 底部固定区域 -->
+                    © Gzu - 项目流程体验平台
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <script>
+        //JavaScript代码区域
+        layui.use(['element', 'carousel'], function () {
+            var element = layui.element;
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test1',
+                width: '100%', //设置容器宽度
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+    </script>
+</body>
+
+</html>
