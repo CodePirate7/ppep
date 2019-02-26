@@ -86,10 +86,11 @@
             <div class="layui-row">
                 <div class="layui-col-sm3">
                     <img src="logo.png" alt="">
-                    <button type="button" class="collapse-btn" style="position:relative;top:0;right:0;background: #000;">
-                        <i class=" layui-icon layui-icon-align-center" ></i>
-                    </button>
+                    
                 </div>
+                <button id="btn1"type="button" class="collapse-btn" style="position: absolute;top:20px;right:0;">
+                    <i class=" layui-icon layui-icon-align-center" ></i>
+                </button>
                 <div class="layui-col-sm1 this "><a href="/">首页</a></div>
                 <div class="layui-col-sm1"><a href="">论坛</a></div>
                 <div class="layui-col-sm1"><a href="">新闻中心</a></div>
@@ -101,8 +102,8 @@
                     <span style="width:70%"><a href=""><img src="delf.jpeg" class="img" alt=""><%- user.username %></a></span>
                     <span style="width:20%"class="h"><a href="">退出</a></span>
                     <%} else{%>
-                    <span class="h" tyle="width:50%"><a href="/login">立即登陆</a></span>
-                    <span class="h" tyle="width:50%"><a href="/reg">注册</a></span>
+                    <span class="h" tyle="width:60%"><a href="/login">立即登陆</a></span>
+                    <span class="h" tyle="width:30%"><a href="/reg">注册</a></span>
                     <%}%>
                 </div>
             </div>
@@ -184,9 +185,19 @@
             if (WindowWidth < 1071){
                 $sm1.addClass('collapse');
                 $sm3.eq(1).addClass('collapse');
-                let $btn = $('.layui-col-sm3 button');
+                let $btn = $('#btn1');
                 $btn.removeClass("collapse-btn");
+                $btn.on('click',function(){
+                    if($sm1.hasClass('collapse') && $sm3.eq(1).hasClass('collapse')){
+                        $sm1.removeClass('collapse');
+                        $sm3.eq(1).removeClass('collapse');
+                    }else{
+                        $sm1.addClass('collapse');
+                        $sm3.eq(1).addClass('collapse');
+                    }
+                })
             }
+
             console.log(WindowWidth);
             
         });
