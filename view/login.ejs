@@ -5,11 +5,8 @@
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="./layui/css/layui.css">
-    <link rel="shortcut icon" href="./favicon.ico">
     <script src="./layui/layui.js"></script>
-    <title>
-        <%- title%>
-    </title>
+    <title><%- title%></title>
     <style>
         *{
             margin: 0;
@@ -115,9 +112,6 @@
                         layer.alert(data.msg);
                         if (data.code === 0) {
                             location.href = "/"
-                        }
-                        if(data.code === 1){
-                            layer.alert("登陆失败,请稍后再试!")
                         }
                     }
                 })

@@ -3,6 +3,7 @@ const express = require('express'),
       User = require("../model/schema.js") //导入user这个表
       user = require('../model/user.js') //对user操作的逻辑结构
       
+//-----------------主页面-------------------
 //监听引导页面
 router.get('/',( req , res ) => {res.render('index',{title: "项目流程体验平台",login: req.session.login,
 user: req.session.user,})})
@@ -12,6 +13,15 @@ router.get('/reg',( req , res ) => { res.render('reg',{title: "注册用户"})})
 //监听登录页面
 router.get('/login',( req , res ) => {res.render('login',{title: "登陆用户"})})
       .post('/login',user.login)
+//监听退出功能路由
+router.get('/logout',( req , res ) => {
+      req.session.destroy()
+      res.redirect("/")
+})
+
+//-----------------后台页面-------------------
+//监听注册首页
+router.get('/admin',( req , res ) => {res.render('admin/admin',{title: "后台管理"})})
 
 
 

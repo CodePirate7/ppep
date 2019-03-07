@@ -5,7 +5,6 @@ const express = require('express'),
       Mongosession = require("connect-mongo")(session),
       app = express()
 
-
 //连接数据库
 mongoose.connect('mongodb://localhost/ppep',{ useNewUrlParser: true })
 
