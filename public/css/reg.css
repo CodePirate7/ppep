@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+img{border:none;}
+.nav{
+    height: 60px;
+    border:1px solid #eee;
+    box-shadow: 0px 0px 10px #aaa;
+}
+.layui-nav{
+    background: #fff;
+}
+.layui-input:hover{
+    box-shadow: 0 0 5px rgb(91, 191, 222)
+}
+.user_form{
+    width: 850px;
+    height: 450px;
+    margin-top: 40px;
+    box-shadow: 0 0 10px #aaa
+}
+.layui-form-pane{
+    border-radius: 100px;
+}
+.left{
+    height: 450px;
+}
+.right{
+    height: 450px;
+    padding-top: 5px;
+}
+.layui-form-select dl dd.layui-this{
+    background:rgb(91, 191, 222);
+}
+.layui-form-checked span{
+    background: rgb(91, 191, 222);
+}
+.layui-form-checked i{
+    color: rgb(91, 191, 222)
+}
+.layui-form-checked:hover span{
+    background: rgb(91, 191, 222);
+}
+.layui-form-checked:hover i{
+    color: rgb(91, 191, 222)
+}
+.layui-container{
+    padding: 0px;
+}
+/* .img-responsive{
+    display: block;
+    height: auto;
+    max-width: 100%;
+} */

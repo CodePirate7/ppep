@@ -7,9 +7,10 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true},
     hear: {type: String},                 //用户头像
     like: {type: [String]},          //用户意愿的方向
-    major :{type: String},
+    major :{type: String},            //专业
     ofclass: {type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'class'}]}, //用户所在班级编号外链班级表
     ofproject: {type: [{type: mongoose.Schema.Types.ObjectId, ref: 'projects'}]},//用户体验的项目
+    ismanager: {type: Boolean, required: true,default: false }
 })
 
 //

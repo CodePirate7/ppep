@@ -41,6 +41,7 @@ app.set('views',__dirname + '/view')
 
 //设置路由
 app.use('/',require('./router/router.js'))
+app.use('/admin',require('./router/admin.js'))
 
 
 

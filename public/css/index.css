@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.bg {
+    height: 60px;
+    box-shadow: 0px 0px 10px #000000;
+}
+.layui-container {
+    padding: 0;
+}
+.layui-row .layui-col-sm1 {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 16px;
+}
+.layui-col-sm3 {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 16px;
+}
+.layui-col-sm1:hover {
+    background: rgb(91, 191, 222)
+}
+.layui-col-sm3 .h:hover {
+    background: rgb(91, 191, 222)
+}
+.layui-row>div>span {
+    display: inline-block;
+    
+}
+.this {
+    background: rgb(91, 191, 222)
+}
+.layui-field-box {
+    height: 200px;
+    border: 1px solid #eee;
+}
+.img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.img-responsive{
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+.collapse{
+    display: none;
+
+}
+.collapse-btn{
+    display: none;
+}

@@ -44,3 +44,51 @@ exports.login = (req, res) => {
         res.send({msg: "用户不存在",code: 1})
     })
 }
+
+//后台用户管理功能
+exports.users = ( req , res ) => {
+        Promise.all([
+            //写分页功能
+            User.find().skip((req.body.page - 1) * req.body.limit).limit(Number(req.body.limit)),
+            //计算总共有多少条数据
+            User.countDocuments()
+        ]).then(data => {
+            res.send({
+                code: 0,
+                data: data[0],
+                count: data[1]
+            })
+        })
+}
+
+//后台用户管理员权限功能
+exports.ismanager = ( req , res ) => {
+    User.updateOne({
+        _id: req.body._id
+    }, {
+        $set: {
+            ismanager: req.body.ismanager
+        }
+    }, (err, data) => {
+        res.send({
+            code: 0,
+            data: "修改成功"
+        })
+    })
+}
+
+//后台重置密码的路由
+exports.repassword = ( req , res ) => {
+    User.updateOne({
+        _id: req.body._id
+    }, {
+        $set: {
+            password: req.body.newpassword
+        }
+    }, (err, data) => {
+        res.send({
+            code: 0,
+            data: "修改成功"
+        })
+    })
+}
