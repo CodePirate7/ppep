@@ -13,7 +13,17 @@ const userSchema = new mongoose.Schema({
     ismanager: {type: Boolean, required: true,default: false }
 })
 
-//
-const user = mongoose.model("user" , userSchema)
+//创建新闻表输入规则
+const newsSchema = new mongoose.Schema({
+    title: {type: String, required: true},        //新闻标题
+    content: {type: String, required: true},    //新闻内容
+    time: {type: String, default: new Date()},  //新闻发布时间
+    author: {type: String}
+})
 
-module.exports = user
+
+//创建用户表
+const user = mongoose.model("user" , userSchema)
+const news = mongoose.model("news", newsSchema)
+
+module.exports = {user,news}

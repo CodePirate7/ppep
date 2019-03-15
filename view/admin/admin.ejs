@@ -1,17 +1,19 @@
 <% include ../header.ejs %>
+
 <body>
 	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 		<ul class="layui-tab-title">
 			<li class="layui-this">用户管理</li>
-			<li>新闻管理</li>
-			<li>项目管理</li>
+			<li>新闻列表</li>
+			<li>发布新闻</li>
+			<li>项目管理</li>>
 			<li>竞赛管理</li>
+			<li>轮播管理</li>
 			<li><a href="/">返回首页</a></li>
 			<li class=''>
 				<img src="delf.jpeg" alt="" class="layui-nav-img">
 				<%- user.username%>
 			</li>
-
 		</ul>
 		<div class="layui-tab-content">
 			<div class="layui-tab-item layui-show">
@@ -23,10 +25,35 @@
 				</div>
 			</div>
 			<div class="layui-tab-item">内容2</div>
-			<div class="layui-tab-item">内容3</div>
-			<div class="layui-tab-item">内容4</div>
-			<div class="layui-tab-item">内容5</div>
+			<div class="layui-tab-item">
+				<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+					<legend>发布新闻</legend>
+				</fieldset>
+				<form action="" class="layui-form">
+					<div class="layui-form-item">
+						<label class="layui-form-label">标题</label>
+						<div class="layui-input-block">
+							<input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">内容</label>
+						<div class="layui-input-block">
+							<textarea id="textedit" style="display: none;"></textarea>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label"></label>
+						<div class="layui-input-block">
+							<button class="layui-btn" lay-submit lay-filter="newssubmit">立即发布</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
+		<div class="layui-tab-item">内容4</div>
+		<div class="layui-tab-item">内容5</div>
+	</div>
 	</div>
 </body>
 

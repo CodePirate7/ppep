@@ -1,8 +1,17 @@
-layui.use(['table', 'element', 'form'], function () {
+layui.use(['table', 'element', 'form','layedit'], function () {
     let element = layui.element;
     let $ = layui.$;
     let table = layui.table;
     let form = layui.form;
+    let layedit = layui.layedit;
+
+    //选项卡头像浮动清除
+    (function () {
+        let aLi = $('.layui-tab-title li');
+        console.log(aLi);
+    }());
+    //-----------------用户管理--------------------
+    //用户管理表格渲染
     table.render({
         elem: '#test',
         url: '/admin/user/',
@@ -58,12 +67,6 @@ layui.use(['table', 'element', 'form'], function () {
         })
     });
 
-    //选项卡头像浮动清除
-    (function () {
-        let aLi = $('.layui-tab-title li');
-        console.log(aLi);
-    }());
-
     //监听管理员权限
     form.on('switch(ismanagerDemo)', function (obj) {
         $.ajax({
@@ -82,4 +85,31 @@ layui.use(['table', 'element', 'form'], function () {
             }
         })
     })
+
+    //-----------------发布新闻--------------------
+
+    //富文本编辑器
+    let edit = layedit.build('textedit',{
+        uploadImage: {url: '/admin/news/upload/',method: 'post'}
+    })
+
+    //新闻内容提交
+    form.on('submit(newssubmit)',data =>{
+        let field = data.field;
+        field.content = layedit.getContent(edit);
+        $.ajax({
+            url: '/admin/news/add',
+            method: 'post',
+            data: field,
+            success(msg){
+                if(msg.code === 0){
+                    layer.alert(msg.data)
+                }
+            }
+        })
+        return false;
+    })
+    
+
+
 });

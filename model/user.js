@@ -1,4 +1,4 @@
-const User = require("../model/schema.js")
+const {user: User} = require("../model/schema.js")
 
 //用户注册功能
 exports.reg = (req, res) => {
