@@ -33,6 +33,11 @@ router.post("/user/ismanager",user.ismanager)
 //监听重置密码功能
 router.post("/user/repassword",user.repassword)
 
+//-----------------新闻列表管理-------------------
+
+//新闻列表
+router.post("/news",news.views)
+
 //-----------------新闻发布-------------------
 
 //监听新闻发布上传图片功能

@@ -1,9 +1,10 @@
-layui.use(['table', 'element', 'form','layedit'], function () {
+layui.use(['table', 'element', 'form','layedit','util'], function () {
     let element = layui.element;
     let $ = layui.$;
     let table = layui.table;
     let form = layui.form;
     let layedit = layui.layedit;
+    let util = layui.util;
 
     //选项卡头像浮动清除
     (function () {
@@ -85,6 +86,35 @@ layui.use(['table', 'element', 'form','layedit'], function () {
             }
         })
     })
+
+    //-----------------发布新闻--------------------
+
+    table.render({
+        elem: '#news',
+        url: '/admin/news/',
+        method: 'post',
+        cellMinWidth: 80,
+        cols: [
+            [{
+                    field: 'title',
+                    title: '标题',
+                    aligin: 'center',
+                    
+                },
+                {
+                    field: 'time',
+                    title: '发布时间',
+                    aligin: 'center',
+                    sort:true,
+                    templet: d => {
+                        return util.timeAgo(new Date(d.time),true)
+                    }
+                },
+            ]
+        ],
+        page: true
+    });
+
 
     //-----------------发布新闻--------------------
 
