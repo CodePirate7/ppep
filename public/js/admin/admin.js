@@ -22,23 +22,23 @@ layui.use(['table', 'element', 'form','layedit','util'], function () {
             [{
                     field: 'username',
                     title: '用户名',
-                    aligin: 'center'
+                    align: 'center'
                 },
                 {
                     field: "password",
                     title: "用户密码",
-                    aligin: "center",
+                    align: "center",
                     edit: "test"
                 },
                 {
                     field: 'major',
                     title: '专业',
-                    aligin: 'center',
+                    align: 'center',
                 },
                 {
                     field: 'ismanager',
                     title: '管理员权限',
-                    aligin: 'center',
+                    align: 'center',
                     templet: d => {
                         return `<input type="checkbox" name="ismanager" value="${d._id}" lay-skin="switch" lay-text="可用|不可用" lay-filter="ismanagerDemo" ${d.ismanager === true ? 'checked' : ''}>`
 
@@ -87,7 +87,7 @@ layui.use(['table', 'element', 'form','layedit','util'], function () {
         })
     })
 
-    //-----------------发布新闻--------------------
+    //-----------------新闻列表--------------------
 
     table.render({
         elem: '#news',
@@ -98,22 +98,57 @@ layui.use(['table', 'element', 'form','layedit','util'], function () {
             [{
                     field: 'title',
                     title: '标题',
-                    aligin: 'center',
+                    align: 'center',
                     
+                },
+                {
+                    field: 'author',
+                    title: '发布者',
+                    align: 'center',
+                    templet: d => {
+                        return d.author.username
+                    }
+
                 },
                 {
                     field: 'time',
                     title: '发布时间',
-                    aligin: 'center',
+                    align: 'center',
                     sort:true,
                     templet: d => {
                         return util.timeAgo(new Date(d.time),true)
                     }
                 },
+                {
+                    field: 'tool',
+                    title: '操作',
+                    align: 'center',
+                    toolbar: '#barDel'
+                }
+                
             ]
         ],
         page: true
     });
+
+    //删除任务
+    table.on('tool(demo1)', obj => {
+        console.log(obj.data._id);
+        $.ajax({
+            url: '/admin/news/del',
+            method: 'post',
+            data: {
+                _id: obj.data._id
+            },
+            success(data) {
+                data.code === 1 && layer.tips(data.msg, obj.othis)
+                data.code === 0 && layer.alert(data.msg, function () {
+                    window.location.reload()
+                })
+            }
+
+        })
+    })
 
 
     //-----------------发布新闻--------------------
@@ -133,7 +168,9 @@ layui.use(['table', 'element', 'form','layedit','util'], function () {
             data: field,
             success(msg){
                 if(msg.code === 0){
-                    layer.alert(msg.data)
+                    layer.alert(msg.msg,function(){
+                        window.location.reload()
+                    }) 
                 }
             }
         })

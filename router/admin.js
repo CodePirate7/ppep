@@ -38,6 +38,9 @@ router.post("/user/repassword",user.repassword)
 //新闻列表
 router.post("/news",news.views)
 
+//新闻删除
+router.post("/news/del",news.del)
+
 //-----------------新闻发布-------------------
 
 //监听新闻发布上传图片功能
@@ -45,6 +48,8 @@ router.post("/news/upload",upload.newsupload)
 
 //监听发布新闻提交
 router.post("/news/add",news.add)
+
+
 
 
 

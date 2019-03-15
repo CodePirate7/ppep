@@ -18,7 +18,7 @@ const newsSchema = new mongoose.Schema({
     title: {type: String, required: true},        //新闻标题
     content: {type: String, required: true},    //新闻内容
     time: {type: String, default: new Date()},  //新闻发布时间
-    author: {type: String}
+    author: {type: mongoose.Schema.Types.ObjectId, ref: 'user'}
 })
 
 
